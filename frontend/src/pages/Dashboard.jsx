@@ -18,15 +18,15 @@ function Dashboard() {
   useEffect(() => {
     if (!user) {
       navigate('/login');
+    } else {
+      if (isError) {
+        console.log(message);
+      }
+
+      dispatch(getGoals());
+
+      return () => dispatch(reset());
     }
-
-    if (isError) {
-      console.log(message);
-    }
-
-    dispatch(getGoals());
-
-    return () => dispatch(reset());
   }, [user, navigate, isError, message, dispatch]);
 
   if (isLoading) return <Spinner />;
